@@ -27,7 +27,6 @@ class Board
  
   def add_x(x)
     if @colums.include?(x) && @bases[x][0] > -1
-    #base = @matrix[@bases[x][0]][@bases[x][1]]
     @matrix[@bases[x][0]][@bases[x][1]]  = "X"
     @bases[x][0] -= 1
     @matrix
@@ -41,7 +40,6 @@ class Board
 
   def add_o(x)
     if @colums.include?(x) && @bases[x][0] > -1
-     #base = @matrix[@bases[x][0]][@bases[x][1]]
       @matrix[@bases[x][0]][@bases[x][1]]  = "O"
       @bases[x][0] -= 1
       @matrix
@@ -156,7 +154,6 @@ class Board
     }
     print_matrix
   end
-
 
 end
 

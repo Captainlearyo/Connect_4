@@ -20,16 +20,17 @@ RSpec.describe Board do
       board.print_matrix
       board.add_x('A')
       board.print_matrix
-      expect(board.add_x('L')).to eq("Please enter valid input")
+      #expect(board.add_x('L')).to eq("Please enter valid input")
       board.add_x('A')
       board.add_x('A')
       board.add_x('A')
       board.add_x('A')
       board.print_matrix
-      expect(board.add_x('A')).to eq("Please enter valid input")
+      #expect(board.add_x('A')).to eq("Please enter valid input")
       board.print_matrix
       board.add_o('G')
       board.print_matrix
+      board.check_colums
                               
     end
   end

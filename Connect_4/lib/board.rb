@@ -12,13 +12,13 @@ class Board
     ] 
 
     @bases = {
-    'A' => [5,0],
-    'B' => [5,1],
-    'C' => [5,2],
-    'D' => [5,3],
-    'E' => [5,4],
-    'F' => [5,5],
-    'G' => [5,6]
+     'A' => [5,0],
+     'B' => [5,1],
+     'C' => [5,2],
+     'D' => [5,3],
+     'E' => [5,4],
+     'F' => [5,5],
+     'G' => [5,6]
   }
  
     @str = ["A", "B", "C", "D","E", "F", "G"]
@@ -34,6 +34,8 @@ class Board
     else
       p "Please enter valid input"
     end
+    print_matrix
+    check_for_win
   end
 
   def add_o(x)
@@ -45,6 +47,7 @@ class Board
       else
         p "Please enter valid input"
       end
+      check_for_win
   end
 
   def print_matrix
@@ -63,15 +66,29 @@ class Board
   end
 
   def check_for_win
-
+    if check_colums || check_rows
+      print_matrix
+      p "Winner"
+    end
   end
 
   def check_colums
-    
+    m = @matrix
+    col_A = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_B = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_C = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_D = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_E = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_F = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_G = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    if (col_A || col_B || col_C || col_D || col_E || col_F || col_G).include?("XXXX" || "OOOO") 
+     true
+    end
+
   end
 
   def check_rows
-    
+
   end
 
 

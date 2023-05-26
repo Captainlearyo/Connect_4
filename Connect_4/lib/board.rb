@@ -1,5 +1,5 @@
 class Board
-    
+    # Wow Clay these are neato
   def initialize
    
     @matrix = [

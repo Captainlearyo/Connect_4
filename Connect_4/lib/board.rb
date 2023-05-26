@@ -36,6 +36,7 @@ class Board
     end
     print_matrix
     check_for_win
+    check_fo_tie
   end
 
   def add_o(x)
@@ -49,6 +50,7 @@ class Board
       end
       print_matrix
       check_for_win
+      check_fo_tie
   end
 
   def print_matrix
@@ -66,9 +68,14 @@ class Board
      p df.transpose
   end
 
+  def check_fo_tie
+    if !@matrix.join.include?(".")
+      p "TIE GAME"
+    end
+  end
+
   def check_for_win
-    if check_colums || check_rows
-      print_matrix
+    if check_colums || check_rows || check_diagnal
       p "Winner"
     end
   end
@@ -99,7 +106,7 @@ class Board
     row_3 = m[3].join
     row_2 = m[4].join
     row_1 = m[5].join
-    p row_1
+
     if (row_1 || row_2 || row_3 || row_4 || row_5 || row_6).include?("XXXX") 
       true
     elsif (row_1 || row_2 || row_3 || row_4 || row_5 || row_).include?("OOOO")

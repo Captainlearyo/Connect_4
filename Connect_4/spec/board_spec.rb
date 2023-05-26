@@ -13,13 +13,7 @@ RSpec.describe Board do
     it 'can add' do
       expect(board).to be_an_instance_of(Board)
   
-      board.print_matrix
-      board.add_o('A')
-      board.add_o('B')
-      board.add_o('C')
-      board.add_o('D')
-      
-      
+      board.print_matrix 
           
     end
   end

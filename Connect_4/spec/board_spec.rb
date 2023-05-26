@@ -10,7 +10,7 @@ RSpec.describe Board do
     end
 
    
-    it 'can add paice' do
+    it 'can add' do
       expect(board).to be_an_instance_of(Board)
   
       board.print_matrix

@@ -86,7 +86,7 @@ class Board
     if (col_A || col_B || col_C || col_D || col_E || col_F || col_G).include?("XXXX") 
      true
     elsif (col_A || col_B || col_C || col_D || col_E || col_F || col_G).include?("OOOO") 
-    true
+      true
     end
 
   end

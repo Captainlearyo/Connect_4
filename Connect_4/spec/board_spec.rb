@@ -14,6 +14,25 @@ RSpec.describe Board do
       expect(board).to be_an_instance_of(Board)
   
       board.print_matrix 
+      board.add_x("A")
+      board.add_x("B")
+      board.add_x("C")
+      board.add_o("D")
+      board.add_x("E")
+      board.add_x("B")
+      board.add_x("C")
+      board.add_x("C")
+      board.add_x("D")
+      board.add_x("D")
+      board.add_x("D")
+      
+
+    
+
+      
+
+      
+
           
     end
   end

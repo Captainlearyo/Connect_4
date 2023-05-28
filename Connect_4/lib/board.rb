@@ -1,5 +1,6 @@
+require './lib/insertable'
 class Board
-  attr_reader :matrix, :bases, :columns
+  include Insertable
   def initialize
     @matrix = [
       [".",".",".",".",".",".","."],
@@ -129,30 +130,6 @@ class Board
      'G' => [5,6]
     }
     print_matrix
-  end
-
-  def add_x(x)
-    if @columns.include?(x) && @bases[x][0] > -1
-    @matrix[@bases[x][0]][@bases[x][1]]  = "X"
-    @bases[x][0] -= 1
-    else
-      p "Please enter valid input"
-    end
-    print_matrix
-    check_for_win
-    check_for_tie
-  end
-
-  def add_o(x)
-    if @columns.include?(x) && @bases[x][0] > -1
-      @matrix[@bases[x][0]][@bases[x][1]]  = "O"
-      @bases[x][0] -= 1
-      else
-        p "Please enter valid input"
-      end
-      print_matrix
-      check_for_win
-      check_for_tie
   end
 end
 

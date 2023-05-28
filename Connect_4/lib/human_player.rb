@@ -14,4 +14,3 @@ include Insertable
     end
   end
 end
-

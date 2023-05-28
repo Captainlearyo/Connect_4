@@ -3,11 +3,12 @@ class Computer
  #attr__accessor :
     def initialize
        
+      @board
 
 
     end  
 
-def random
+def make_move()
 
 end
 

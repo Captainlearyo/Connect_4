@@ -1,8 +1,17 @@
-require "./lib/human_player"
+require "./lib/insertable"
 
-class ComputerPlayer < HumanPlayer
+class ComputerPlayer
+include Insertable
+  def initialize
+  end
+
   def make_move(board)
-    column = find_valid_column(board)
-    board.add_o(column)
+    columns = ["A", "B", "C", "D", "E", "F", "G"]
+    column = columns.sample
+    if valid_column?(column)
+      board.insert_o(column)
+    else
+      make_move(board)
+    end
   end
 end

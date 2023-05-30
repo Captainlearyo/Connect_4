@@ -160,7 +160,7 @@ class Board
   def insert_x(column)
     if valid_column?(column)
     @matrix[@bases[column][0]][@bases[column][1]]  = "X"
-    bases[column][0] -= 1
+    @bases[column][0] -= 1
     true
     else
       false
@@ -178,7 +178,7 @@ class Board
   end
 
   def valid_column?(column)
-    columns.include?(column) && bases[column][0] > -1 ? true : false
+    @columns.include?(column) && @bases[column][0] > -1 ? true : false
   end
 
   def clear_board

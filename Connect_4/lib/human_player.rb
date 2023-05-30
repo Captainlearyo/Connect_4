@@ -1,8 +1,4 @@
 class HumanPlayer
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b133e8b109541404cef045ab8e0e2138a5dea8a
 
   def initialize
   end

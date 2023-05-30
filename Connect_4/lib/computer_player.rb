@@ -1,7 +1,10 @@
-require "./lib/insertable"
+
 
 class ComputerPlayer
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1b133e8b109541404cef045ab8e0e2138a5dea8a
   def initialize
 
     @index_chart = {
@@ -14,6 +17,13 @@ class ComputerPlayer
       6 => 'G'
     }
   end
+
+
+#   def make_move(board)
+#     columns = ["A", "B", "C", "D", "E", "F", "G"]
+#     column = columns.sample
+#     if board.insert_o(column)
+#       true
 
   
 
@@ -30,6 +40,7 @@ class ComputerPlayer
       return logic_check_diagonal_1(board)
     elsif logic_check_diagonal_2(board)
       return logic_check_diagonal_2(board)
+
     else
       return random_move(board)
     end

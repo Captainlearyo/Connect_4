@@ -22,7 +22,7 @@ RSpec.describe ComputerPlayer do
       
       board.insert_o(computer.logic(board))
       board.insert_o(computer.logic(board))
-     # board.insert_o(computer.logic(board))
+      board.insert_o(computer.logic(board))
 
     
 

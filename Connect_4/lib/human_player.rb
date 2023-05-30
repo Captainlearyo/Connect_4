@@ -1,6 +1,6 @@
 require './lib/insertable'
 class HumanPlayer
-include Insertable
+
 
   def initialize
   end

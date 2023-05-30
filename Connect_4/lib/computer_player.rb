@@ -1,7 +1,7 @@
 require "./lib/insertable"
 
 class ComputerPlayer
-include Insertable
+
   def initialize
 
     @index_chart = {

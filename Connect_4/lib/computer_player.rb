@@ -40,9 +40,8 @@ class ComputerPlayer
   #     return logic_check_diagonal_1(board)
   #   elsif logic_check_diagonal_2(board)
   #     return logic_check_diagonal_2(board)
-
   #   else
-  #     return random_move(board)
+  #     return make_move(board)
   #   end
 
   # end

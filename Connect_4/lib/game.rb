@@ -5,6 +5,8 @@ class Game
        @current_player = HumanPlayer.new
        @board = Board.new
        @computer_player = ComputerPlayer.new
+       @player_wins = 0
+       
     end  
 
     def play

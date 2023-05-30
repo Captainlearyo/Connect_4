@@ -1,6 +1,8 @@
-require './lib/insertable'
+
 class Board
-  include Insertable
+
+  attr_reader :bases, :columns, :matrix
+
   def initialize
     @matrix = [
       [".",".",".",".",".",".","."],
@@ -41,17 +43,31 @@ class Board
 
   def check_for_tie
     if !@matrix.join.include?(".")
-      p "TIE GAME"
       true
     else 
       false
     end
   end
 
-  def check_for_win
-    if check_columns || check_rows || check_diagonal
-      p "Winner"
+  def check_for_win_x
+    if check_rows == "Win"
       true
+    elsif check_columns == "Win"
+      true
+    elsif check_diagonal == "Win"
+      true
+    else
+      false
+    end
+  end
+
+  def check_for_win_o
+    if check_columns == "Lose" 
+      true
+    elsif check_rows == "Lose"
+      true
+    elsif check_diagonal == "Lose"
+      true 
     else
       false
     end
@@ -66,10 +82,12 @@ class Board
     col_E = [m[0][4], m[1][4], m[2][4],m[3][4],m[4][4], m[5][4]].join
     col_F = [m[0][5], m[1][5], m[2][5],m[3][5],m[4][5], m[5][5]].join
     col_G = [m[0][6], m[1][6], m[2][6],m[3][6],m[4][6], m[5][6]].join  
-    if [col_A, col_B, col_C, col_D, col_E, col_F, col_G].any? { |col| col.include?("XXXX") || col.include?("OOOO") }
-      true
+    if [col_A, col_B, col_C, col_D, col_E, col_F, col_G].any? { |col| col.include?("XXXX")}
+      "Win"
+    elsif [col_A, col_B, col_C, col_D, col_E, col_F, col_G].any? { |col| col.include?("OOOO")}
+      "Lose"
     else
-      false
+    false
     end
   end
 
@@ -81,8 +99,10 @@ class Board
     row_3 = m[3].join
     row_2 = m[4].join
     row_1 = m[5].join
-    if [row_1, row_2, row_3, row_4, row_5, row_6].any? { |row| row.include?("XXXX") || row.include?("OOOO") }
-      true
+    if [row_1, row_2, row_3, row_4, row_5, row_6].any? {|row| row.include?("XXXX")}
+     "Win"
+    elsif [row_1, row_2, row_3, row_4, row_5, row_6].any? {|row| row.include?("OOOO")}
+     "Lose"
     else
       false
     end
@@ -104,10 +124,36 @@ class Board
     diag_12 = [m[2][0], m[3][1], m[4][2],m[5][3]].join
     diag_arr = [diag_1, diag_2, diag_3, diag_4, diag_5, diag_6, diag_7, diag_8, diag_9, diag_10, diag_11, diag_12]
     if diag_arr.any? {|diagonal| diagonal.include?("XXXX") || diagonal.include?("OOOO")}
-      true
+     "Win"
+    elsif diag_arr.any? {|diagonal| diagonal.include?("XXXX") || diagonal.include?("OOOO")}
+     "Lose"
     else
       false
     end
+  end
+
+  def insert_x(column)
+    if valid_column?(column)
+    @matrix[@bases[column][0]][@bases[column][1]]  = "X"
+    bases[column][0] -= 1
+    true
+    else
+      false
+    end
+  end
+
+  def insert_o(column)
+    if valid_column?(column)
+      @matrix[@bases[column][0]][@bases[column][1]]  = "O"
+      @bases[column][0] -= 1
+      true
+      else
+        false
+      end
+  end
+
+  def valid_column?(column)
+    columns.include?(column) && bases[column][0] > -1 ? true : false
   end
 
   def clear_board

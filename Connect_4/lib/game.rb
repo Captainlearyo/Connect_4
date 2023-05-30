@@ -24,7 +24,7 @@ class Game
             @board.print_matrix
             p "#{@username}, you're up!"
             @current_player.make_move(@board)
-            @computer_player.make_move(@board)
+            @computer_player.logic(@board)
             if @board.check_for_win_x
                 @board.print_matrix
                 p "Nice job #{@username}, you win!"

@@ -1,8 +1,5 @@
 
 class Board
-  attr_reader :matrix, :bases, :columns
-   #attr__accessor :
-  include Insertable
   def initialize
     @matrix = [
       [".",".",".",".",".",".","."],

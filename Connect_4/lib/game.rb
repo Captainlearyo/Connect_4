@@ -1,28 +1,54 @@
 require './lib/board'
 require './lib/computer_player'
+require './lib/human_player'
 class Game
     def initialize
        @current_player = HumanPlayer.new
        @board = Board.new
        @computer_player = ComputerPlayer.new
-       @player_wins = 0
-       
+       p "Please enter username."
+       @username = gets.chomp
+       p "Hi #{@username}, welcome to Connect 4!"
+       p "Although they're quite simple, here are the rules:"
+       p "1: Your pieces are an X, the computer is O."
+       p "2: Either horizontally, vertically, or diagonally,"
+       p "   try to connect 4 of your pieces in a row."
+       p "3: Only columns A, B, C, D, E, F, and G are accepted as valid input."
+       puts
+       puts
+       p "~~~~~Good luck!~~~~~"
     end  
 
     def play
-       loop do
+       until @board.check_for_win_x || @board.check_for_win_o || @board.check_for_tie do
             @board.print_matrix
+            p "#{@username}, you're up!"
             @current_player.make_move(@board)
             @computer_player.make_move(@board)
-            break if !@board.check_for_win && !@board.check_for_tie
+            if @board.check_for_win_x
+                @board.print_matrix
+                p "Nice job #{@username}, you win!"
+            elsif @board.check_for_win_o
+                @board.print_matrix
+                p "Sorry #{@username}, you got beat by sentient AI."
+            elsif @board.check_for_tie
+                @board.print_matrix
+                p "Tie game! Better luck next time."
+            else
+            end           
         end
     end
 
-    # def switch_players
-    #     if @current_player == @human_player
-    #       @current_player = @computer_player
-    #     else
-    #       @current_player = @human_player
-    #     end
-    #   end
+    def menu
+        loop do
+          p "Play another? Type 1 to play again or press any other key to quit."
+          round = gets.chomp.to_i
+          if round == 1
+            @board.clear_board
+            play
+          else
+            break
+          end
+        end
+    end
 end

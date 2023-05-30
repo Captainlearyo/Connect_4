@@ -1,5 +1,6 @@
 
 class Board
+  attr_reader :matrix, :bases, :columns
   def initialize
     @matrix = [
       [".",".",".",".",".",".","."],

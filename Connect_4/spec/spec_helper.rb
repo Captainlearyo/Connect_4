@@ -1,7 +1,0 @@
-require 'pry'
-require 'daru'
-require 'pp'
-require './lib/board'
-#require './lib/game'
-require './lib/computer_player'
-#require './lib/human_player'

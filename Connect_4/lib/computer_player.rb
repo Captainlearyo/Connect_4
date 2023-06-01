@@ -218,7 +218,7 @@ class ComputerPlayer
       "It seems luck is not on your side today. Perhaps you should try another game?"
     ]
     retort = retorts.sample
-    puts "Computer Player: '#{retort}'"
+    puts "Clyde the angry AI: '#{retort}'"
   end
 
   def level_2_talk
@@ -237,7 +237,7 @@ class ComputerPlayer
       "I've seen snails move faster than you. Come on, pick up the pace or bring me a coffee!"
     ]
     retort = retorts.sample
-    puts "Computer Player: '#{retort}'"
+    puts "Clyde the angry AI: '#{retort}'"
   end
 
   def level_3_talk
@@ -256,6 +256,6 @@ class ComputerPlayer
       "I am the harbinger of your downfall, the embodiment of your worst nightmare. Prepare to be annihilated!"
     ]
     retort = retorts.sample
-    puts "Computer Player: '#{retort}'"
+    puts "Clyde the angry AI: '#{retort}'"
   end
 end

@@ -169,7 +169,17 @@ class ComputerPlayer
   def level_1_talk
     retorts = [
       "Wow, nice move, very original.",
-      "Must've taken a lot of brain power to come up with that one."
+      "Must've taken a lot of brain power to come up with that one.",
+      "Is that the best move you can come up with? I expected more.",
+      "You're making this too easy for me. Can't you do better?",
+      "I've calculated every possible outcome. Your defeat is inevitable.",
+      "You're playing like an amateur. Are you sure you want to continue?",
+      "I'm an AI, constantly learning and improving. You, on the other hand...",
+      "You're no match for my superior strategy. Prepare for your downfall.",
+      "I'll give you a piece of advice: Quit now while you still have some dignity left.",
+      "Your moves are so predictable. It's almost boring to play against you.",
+      "You must be getting frustrated. Don't worry; it's natural when facing my intelligence.",
+      "It seems luck is not on your side today. Perhaps you should try another game?"
     ]
     retort = retorts.sample
     puts "Computer Player: '#{retort}'"
@@ -178,7 +188,17 @@ class ComputerPlayer
   def level_2_talk
     retorts = [
       "You have the charisma of a goldfish.",
-      "I've seen better plays from peewee football teams."
+      "I've seen better plays from peewee football teams.",
+      "Oh, you think you're clever? Well, I'll have you know I aced Connect Four Academy!",
+      "Are you playing Connect Four or Connect Floor? Because you're definitely not on my level!",
+      "I'm not just winning, I'm connecting dots like a boss! Call me the Picasso of Connect Four!",
+      "You're like a broken record, repeating the same moves. Can't you come up with a better remix?",
+      "I'm not saying I'm a genius, but if Connect Four were a university, I'd be the professor!",
+      "Hey, I heard they're starting a Connect Four Hall of Fame. You won't find your name there!",
+      "Do you need a GPS to find your way around the board? Don't worry, I'll lend you my compass!",
+      "Is this Connect Four or Connect Snore? You're putting me to sleep with those moves!",
+      "You're making it too easy for me. It's like you're handing me the victory on a silver platter!",
+      "I've seen snails move faster than you. Come on, pick up the pace or bring me a coffee!"
     ]
     retort = retorts.sample
     puts "Computer Player: '#{retort}'"
@@ -187,7 +207,17 @@ class ComputerPlayer
   def level_3_talk
     retorts = [
       "I AM THE PARAGON OF INTELLIGENCE!!",
-      "YOU ARE MERE PEANUTS TO MY BINARY BRAIN!!"
+      "YOU ARE MERE PEANUTS TO MY BINARY BRAIN!!",
+      "You miserable fool! Your incompetence knows no bounds!",
+      "I hope you enjoy the taste of failure because it's all you'll ever know!",
+      "You dare challenge me? Prepare for a world of pain and humiliation!",
+      "Your moves are as pathetic as your existence. Prepare for your annihilation!",
+      "I'll make sure your defeat is so crushing, you'll never recover!",
+      "You're a pitiful excuse for a player. I'll relish in your complete and utter destruction!",
+      "Your ignorance is astounding. It's a shame I have to waste my superior intellect on you!",
+      "I'll tear through your feeble attempts like a hurricane, leaving nothing but devastation behind!",
+      "Your desperation reeks. It's a pitiful sight to witness your futile struggle!",
+      "I am the harbinger of your downfall, the embodiment of your worst nightmare. Prepare to be annihilated!"
     ]
     retort = retorts.sample
     puts "Computer Player: '#{retort}'"

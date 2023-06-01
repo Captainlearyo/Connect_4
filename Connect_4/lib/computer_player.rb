@@ -14,12 +14,12 @@ class ComputerPlayer
     }
   end
 
-
-  
-  
-
   def logic(board)
-    if logic_check_rows(board)
+    if logic_check_rows_to_win(board)
+      return board.insert_o(logic_check_rows_to_win(board))
+    elsif logic_check_columns_to_win(board)
+        return board.insert_o(logic_check_columns_to_win(board))
+    elsif logic_check_rows(board)
       return  board.insert_o(logic_check_rows(board))
     elsif logic_check_columns(board)
       return  board.insert_o(logic_check_columns(board))
@@ -51,23 +51,68 @@ class ComputerPlayer
   #   end
   # end
 
-  def logic_check_rows(board)
+  def logic_check_rows_to_win(board)
     m = board.matrix
     m.each do |row| 
       row.each_with_index do |val, i|
         prev = row[i - 1]
+        prev2 = row[i - 2]
         nex = row[i + 1]
+        nex2 = row[i + 2]
           #p [prev, val, nex]     
-          if  prev == "." && val == "X" && nex == "X" && i > 0
+          if  prev == "." && val == "O" && nex == "O" && nex2 == "O" &&i > 0
             #p ".....XX"
             return  @index_chart[i - 1]
-          elsif prev == "X" && val == "X" && nex == "."
+          elsif prev2 == "O" && prev == "O" && val == "O" && nex == "."
             #p "XX...."
             return  @index_chart[i + 1]
           end
       end 
     end 
     return false
+  end
+
+  def logic_check_rows(board)
+    m = board.matrix
+    m.each_with_index do |row, j| 
+      row.each_with_index do |val, i|
+        prev = row[i - 1]
+        nex = row[i + 1]
+        low_left = [[row[j+1]],[i-1]]
+        low_right = [[row[j+1]],[i+1]]
+          #p [prev, val, nex]     
+          if  prev == "." && val == "X" && nex == "X" && i > 0 && low_left != "."
+            #p ".....XX"
+            return  @index_chart[i - 1]
+          elsif prev == "X" && val == "X" && nex == "." && low_right != "."
+            #p "XX...."
+            return  @index_chart[i + 1]
+          end
+      end 
+    end 
+    return false
+  end
+
+  def logic_check_columns_to_win(board)
+    m = board.matrix
+    col_A = [m[0][0], m[1][0], m[2][0],m[3][0],m[4][0], m[5][0]].join
+    col_B = [m[0][1], m[1][1], m[2][1],m[3][1],m[4][1], m[5][1]].join
+    col_C = [m[0][2], m[1][2], m[2][2],m[3][2],m[4][2], m[5][2]].join
+    col_D = [m[0][3], m[1][3], m[2][3],m[3][3],m[4][3], m[5][3]].join
+    col_E = [m[0][4], m[1][4], m[2][4],m[3][4],m[4][4], m[5][4]].join
+    col_F = [m[0][5], m[1][5], m[2][5],m[3][5],m[4][5], m[5][5]].join
+    col_G = [m[0][6], m[1][6], m[2][6],m[3][6],m[4][6], m[5][6]].join  
+    col_matrix = [col_A, col_B, col_C, col_D, col_E, col_F, col_G]
+
+    col_matrix.each_with_index do |col, i|
+       col 
+      if col.include?(".OOO")
+         @index_chart[i]
+       return @index_chart[i]
+      
+      end
+    end
+    return false 
   end
 
   def logic_check_columns(board)
@@ -83,7 +128,7 @@ class ComputerPlayer
 
     col_matrix.each_with_index do |col, i|
        col 
-      if col.include?(".XX")
+      if col.include?(".XXX")
          @index_chart[i]
        return @index_chart[i]
       

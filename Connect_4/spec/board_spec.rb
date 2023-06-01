@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'daru'
+require 'pry'
 RSpec.describe Board do
   describe '#initialize board' do
     board = Board.new
@@ -8,6 +9,7 @@ RSpec.describe Board do
     end
 
     it 'can display the board' do
+
       expected =  <<~OUTPUT
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
@@ -57,18 +59,7 @@ RSpec.describe Board do
          6   X   X   X   O   .   .   .
       OUTPUT
       expect{board.print_matrix}.to output(expected).to_stdout
-      expected = <<~OUTPUT
-      "Please enter valid input"
-      #<Daru::DataFrame(6x7)>
-             A   B   C   D   E   F   G
-         1   X   .   .   .   .   .   .
-         2   O   .   .   .   .   .   .
-         3   O   .   .   .   .   .   .
-         4   X   .   .   .   .   .   .
-         5   X   .   .   .   .   .   .
-         6   X   X   X   O   .   .   .
-      OUTPUT
-      expect{board.insert_x("A")}.to output(expected).to_stdout
+      expect(board.insert_x("A")).to eq(false)
     end
   end
   
@@ -76,36 +67,15 @@ RSpec.describe Board do
     board = Board.new
     it 'can check for valid input' do
       board.insert_x("B")
-      expected = <<~OUTPUT
-      "Please enter valid input"
-      #<Daru::DataFrame(6x7)>
-             A   B   C   D   E   F   G
-         1   .   .   .   .   .   .   .
-         2   .   .   .   .   .   .   .
-         3   .   .   .   .   .   .   .
-         4   .   .   .   .   .   .   .
-         5   .   .   .   .   .   .   .
-         6   .   X   .   .   .   .   .
-      OUTPUT
-      expect{board.insert_x("Z")}.to output(expected).to_stdout
+      expect(board.insert_x("Z")).to eq(false)
     end
 
     it 'can check for a vertical win' do
       board.insert_x("A")
       board.insert_x("A")
       board.insert_x("A")
-      expected = <<~OUTPUT
-"Winner"
-#<Daru::DataFrame(6x7)>
-       A   B   C   D   E   F   G
-   1   .   .   .   .   .   .   .
-   2   .   .   .   .   .   .   .
-   3   X   .   .   .   .   .   .
-   4   X   .   .   .   .   .   .
-   5   X   .   .   .   .   .   .
-   6   X   X   .   .   .   .   .
-      OUTPUT
-      expect{board.insert_x("A")}.to output(expected).to_stdout
+      board.insert_x("A")
+      expect(board.check_for_win_x).to eq true
     end
     
     it 'wont trigger a win with four xs not in a row' do
@@ -114,17 +84,7 @@ RSpec.describe Board do
       board.insert_o("A")
       board.insert_x("A")
       board.insert_x("A")
-      expected = <<~OUTPUT
-      #<Daru::DataFrame(6x7)>
-             A   B   C   D   E   F   G
-         1   .   .   .   .   .   .   .
-         2   X   .   .   .   .   .   .
-         3   X   .   .   .   .   .   .
-         4   X   .   .   .   .   .   .
-         5   O   .   .   .   .   .   .
-         6   X   .   .   .   .   .   .
-      OUTPUT
-      expect{board.insert_x("A")}.to output(expected).to_stdout
+      expect(board.check_for_win_x).to eq false
     end
 
     it 'will still register a win even if there is an o' do
@@ -134,8 +94,8 @@ RSpec.describe Board do
       board.insert_x("A")
       board.insert_x("A")
       board.insert_x("A")
+      board.insert_x("A")
       expected = <<~OUTPUT
-      "Winner"
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
          1   X   .   .   .   .   .   .
@@ -145,7 +105,8 @@ RSpec.describe Board do
          5   O   .   .   .   .   .   .
          6   X   .   .   .   .   .   .
       OUTPUT
-      expect{board.insert_x("A")}.to output(expected).to_stdout
+      expect{board.print_matrix}.to output(expected).to_stdout
+      expect(board.check_for_win_x).to eq true
     end
 
     it 'will register a win for os' do
@@ -153,8 +114,8 @@ RSpec.describe Board do
       board.insert_o("A")
       board.insert_o("A")
       board.insert_o("A")
+      board.insert_o("A")
       expected = <<~OUTPUT
-      "Winner"
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
          1   .   .   .   .   .   .   .
@@ -164,7 +125,8 @@ RSpec.describe Board do
          5   O   .   .   .   .   .   .
          6   O   .   .   .   .   .   .
       OUTPUT
-      expect{board.insert_o("A")}.to output(expected).to_stdout
+      expect{board.print_matrix}.to output(expected).to_stdout
+      expect(board.check_for_win_o).to eq true
     end
 
     it 'can check for a horizontal win' do
@@ -172,8 +134,8 @@ RSpec.describe Board do
       board.insert_x("A")
       board.insert_x("B")
       board.insert_x("C")
+      board.insert_x("D")
       expected = <<~OUTPUT
-"Winner"
 #<Daru::DataFrame(6x7)>
        A   B   C   D   E   F   G
    1   .   .   .   .   .   .   .
@@ -183,7 +145,8 @@ RSpec.describe Board do
    5   .   .   .   .   .   .   .
    6   X   X   X   X   .   .   .
       OUTPUT
-      expect{board.insert_x("D")}.to output(expected).to_stdout
+      expect{board.print_matrix}.to output(expected).to_stdout
+      expect(board.check_for_win_x).to eq true
     end
 
     it 'can check for a diagonal win' do
@@ -196,8 +159,8 @@ RSpec.describe Board do
       board.insert_x("C")
       board.insert_x("C")
       board.insert_x("D")
+      board.insert_x("D")
       expected = <<~OUTPUT
-      "Winner"
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
          1   .   .   .   .   .   .   .
@@ -207,7 +170,8 @@ RSpec.describe Board do
          5   X   X   O   O   .   .   .
          6   X   X   X   X   X   .   .
       OUTPUT
-      expect{board.insert_x("D")}.to output(expected).to_stdout
+      expect{board.print_matrix}.to output(expected).to_stdout
+      expect(board.check_for_win_x).to eq true
     end
 
     it 'can verify wins in opposing diagonals' do
@@ -221,8 +185,8 @@ RSpec.describe Board do
       board.insert_x("D")
       board.insert_x("D")
       board.insert_o("D")
+      board.insert_o("D")
       expected = <<~OUTPUT
-      "Winner"
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
          1   .   .   .   .   .   .   .
@@ -232,7 +196,8 @@ RSpec.describe Board do
          5   .   .   .   X   X   O   .
          6   .   .   .   X   O   X   O
       OUTPUT
-      expect{board.insert_o("D")}.to output(expected).to_stdout
+      expect{board.print_matrix}.to output(expected).to_stdout
+      expect(board.check_for_win_o).to eq true
     end
   end
 end

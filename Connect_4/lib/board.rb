@@ -1,4 +1,3 @@
-
 class Board
   attr_reader :matrix, :bases, :columns
   def initialize
@@ -12,45 +11,17 @@ class Board
     ] 
 
     @bases = {
-     'A' => [5,0],
-     'B' => [5,1],
-     'C' => [5,2],
-     'D' => [5,3],
-     'E' => [5,4],
-     'F' => [5,5],
-     'G' => [5,6]
+      'A' => [5,0],
+      'B' => [5,1],
+      'C' => [5,2],
+      'D' => [5,3],
+      'E' => [5,4],
+      'F' => [5,5],
+      'G' => [5,6]
     }
 
     @columns = ["A", "B", "C", "D", "E", "F", "G"]
   end  
-
-  def valid_column?(column)
-    @columns.include?(column) && @bases[column][0] > -1 ? true : false
-  end
-
-  def insert_x(column)
-    if valid_column?(column)
-    @matrix[@bases[column][0]][@bases[column][1]]  = "X"
-    @bases[column][0] -= 1
-    else
-      p "Please enter valid input"
-    end
-    check_for_win
-    check_for_tie
-    print_matrix
-  end
-
-  def insert_o(column)
-    if valid_column?(column)
-      @matrix[@bases[column][0]][@bases[column][1]]  = "O"
-      @bases[column][0] -= 1
-      else
-        p "Please enter valid input"
-      end
-      check_for_win
-      check_for_tie
-      print_matrix
-  end
 
   def print_matrix
    df = Daru::DataFrame.new(
@@ -149,9 +120,9 @@ class Board
     diag_11 = [m[1][0], m[2][1], m[3][2],m[4][3],m[5][4]].join
     diag_12 = [m[2][0], m[3][1], m[4][2],m[5][3]].join
     diag_arr = [diag_1, diag_2, diag_3, diag_4, diag_5, diag_6, diag_7, diag_8, diag_9, diag_10, diag_11, diag_12]
-    if diag_arr.any? {|diagonal| diagonal.include?("XXXX") || diagonal.include?("OOOO")}
+    if diag_arr.any? {|diagonal| diagonal.include?("XXXX")}
      "Win"
-    elsif diag_arr.any? {|diagonal| diagonal.include?("XXXX") || diagonal.include?("OOOO")}
+    elsif diag_arr.any? {|diagonal| diagonal.include?("OOOO")}
      "Lose"
     else
       false
@@ -201,7 +172,6 @@ class Board
      'F' => [5,5],
      'G' => [5,6]
     }
-    print_matrix
   end
 end
 

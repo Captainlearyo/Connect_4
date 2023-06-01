@@ -1,8 +1,4 @@
 class HumanPlayer
-
-  def initialize
-  end
-
   def make_move(board)
     print "Choose a column A-G: "
     column = gets.chomp.upcase

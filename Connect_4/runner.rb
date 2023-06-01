@@ -8,5 +8,3 @@ require 'daru'
 require 'pp'
 
  game = Game.new
- game.play
- game.menu

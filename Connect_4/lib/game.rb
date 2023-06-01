@@ -17,7 +17,7 @@ class Game
     @username = gets.chomp
     p "Hi #{@username}, welcome to Connect 4!"
     menu
-    end  
+  end  
 
   def play
     p "Although they're quite simple, here are the rules:"
@@ -201,11 +201,11 @@ class Game
 
   def menu
     loop do
-        p "Press 1 to play timed matches,"
-        p "press 2 to embark on an epic quest,"
-        p "press 3 to see stats,"
-        p "press any other key to quit"
-        option = gets.chomp.to_i
+      p "Press 1 to play timed matches,"
+      p "press 2 to embark on an epic quest,"
+      p "press 3 to see stats,"
+      p "press any other key to quit"
+      option = gets.chomp.to_i
       if option == 1
         play
       elsif option == 2

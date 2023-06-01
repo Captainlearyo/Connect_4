@@ -50,15 +50,6 @@ class ComputerPlayer
     end
   end
 
-
-  # def random_move(board)
-  #   columns = ["A", "B", "C", "D", "E", "F", "G"]
-  #   column = columns.sample 
-  #   if board.valid_column?(column)
-  #     return column
-  #   end
-  # end
-
   def logic_check_rows_to_win(board)
     m = board.matrix
     m.each do |row| 
@@ -66,13 +57,10 @@ class ComputerPlayer
         prev = row[i - 1]
         prev2 = row[i - 2]
         nex = row[i + 1]
-        nex2 = row[i + 2]
-          #p [prev, val, nex]     
+        nex2 = row[i + 2]   
           if  prev == "." && val == "O" && nex == "O" && nex2 == "O" &&i > 0
-            #p ".....XX"
             return  @index_chart[i - 1]
           elsif prev2 == "O" && prev == "O" && val == "O" && nex == "."
-            #p "XX...."
             return  @index_chart[i + 1]
           end
       end 
@@ -87,13 +75,10 @@ class ComputerPlayer
         prev = row[i - 1]
         nex = row[i + 1]
         low_left = [[row[j+1]],[i-1]]
-        low_right = [[row[j+1]],[i+1]]
-          #p [prev, val, nex]     
+        low_right = [[row[j+1]],[i+1]]     
           if  prev == "." && val == "X" && nex == "X" && i > 0 && low_left != "."
-            #p ".....XX"
             return  @index_chart[i - 1]
           elsif prev == "X" && val == "X" && nex == "." && low_right != "."
-            #p "XX...."
             return  @index_chart[i + 1]
           end
       end 
@@ -111,13 +96,11 @@ class ComputerPlayer
     col_F = [m[0][5], m[1][5], m[2][5],m[3][5],m[4][5], m[5][5]].join
     col_G = [m[0][6], m[1][6], m[2][6],m[3][6],m[4][6], m[5][6]].join  
     col_matrix = [col_A, col_B, col_C, col_D, col_E, col_F, col_G]
-
     col_matrix.each_with_index do |col, i|
        col 
       if col.include?(".OOO")
          @index_chart[i]
        return @index_chart[i]
-      
       end
     end
     return false 
@@ -156,9 +139,7 @@ class ComputerPlayer
       diag.each_with_index do |val ,i|
         prev = diag[i - 1]
         nex = diag[i + 1]
-        #p [prev, val, nex]
        if prev == "X" && val == "X" && nex == "."
-          #p "XX...."
           return  @index_chart[i + 1]
         end
       end
@@ -178,9 +159,7 @@ class ComputerPlayer
       diag.each_with_index do |val ,i|
         prev = diag[i - 1]
         nex = diag[i + 1]
-        #p [prev, val, nex]
        if prev == "X" && val == "X" && nex == "."
-          #p "XX...."
           return  @index_chart[i + 1]
         end
       end
@@ -192,8 +171,7 @@ class ComputerPlayer
     m.each do |row| 
       row.each_with_index do |val, i|
         prev = row[i - 1]
-        nex = row[i + 1]
-          #p [prev, val, nex]     
+        nex = row[i + 1]     
           if  prev == "." && val == "O" && nex == "O" && i > 0
             return  @index_chart[i - 1]
           elsif prev == "O" && val == "O" && nex == "."

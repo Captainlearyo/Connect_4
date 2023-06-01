@@ -1,4 +1,6 @@
-require 'spec_helper'
+require 'pry'
+require 'daru'
+require './lib/board'
 RSpec.describe Board do
   describe '#initialize board' do
     board = Board.new

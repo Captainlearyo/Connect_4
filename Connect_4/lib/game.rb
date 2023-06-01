@@ -6,8 +6,13 @@ class Game
     @current_player = HumanPlayer.new
     @board = Board.new
     @computer_player = ComputerPlayer.new
-    @fastest_win = nil
-    @fastest_loss = nil
+    @stats = {
+    fastest_win: nil,
+    fastest_loss: nil,
+    wins: 0,
+    losses: 0,
+    ties: 0
+    }
     p "Please enter username."
     @username = gets.chomp
     p "Hi #{@username}, welcome to Connect 4!"
@@ -32,10 +37,11 @@ class Game
       @computer_player.logic(@board)
       if @board.check_for_win_x
         @board.print_matrix
+        @stats[:wins] += 1
         finish_time = Time.now.to_i
         time_elapsed = finish_time - start_time
-        if @fastest_win == nil || @fastest_win > time_elapsed
-            @fastest_win = time_elapsed
+        if @stats[:fastest_win] == nil || @stats[:fastest_win] > time_elapsed
+            @stats[:fastest_win] = time_elapsed
         else
         end
         p "Nice job #{@username}, you win!"
@@ -43,14 +49,16 @@ class Game
       elsif @board.check_for_win_o
         @board.print_matrix
         p "Sorry #{@username}, you got beat by sentient AI."
+        @stats[:losses] += 1
         finish_time = Time.now.to_i
         time_elapsed = finish_time - start_time
-        if @fastest_loss == nil || @fastest_loss > time_elapsed
-            @fastest_loss = time_elapsed
+        if @stats[:fastest_loss] == nil || @stats[:fastest_loss] > time_elapsed
+            @stats[:fastest_loss] = time_elapsed
         else
         end
         p "The game lasted #{time_elapsed} seconds. Think you can do better next time?"
       elsif @board.check_for_tie
+        @stats[:ties] += 1
         @board.print_matrix
         p "Tie game! Better luck next time."
         finish_time = Time.now.to_i
@@ -195,7 +203,7 @@ class Game
     loop do
         p "Press 1 to play timed matches,"
         p "press 2 to embark on an epic quest,"
-        p "press 3 to see fastest wins and losses,"
+        p "press 3 to see stats,"
         p "press any other key to quit"
         option = gets.chomp.to_i
       if option == 1
@@ -203,8 +211,12 @@ class Game
       elsif option == 2
         quest
       elsif option == 3
-        p "Fastest win: #{@fastest_win} seconds."
-        p "Fastest loss: #{@fastest_loss} seconds."
+        p "Username = #{@username}"
+        p "Fastest win: #{@stats[:fastest_win]} seconds."
+        p "Fastest loss: #{@stats[:fastest_loss]} seconds."
+        p "Total wins: #{@stats[:wins]}"
+        p "Total losses: #{@stats[:losses]}"
+        p "Total ties: #{@stats[:ties]}"
       else
       break
       end

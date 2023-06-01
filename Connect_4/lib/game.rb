@@ -6,6 +6,8 @@ class Game
     @current_player = HumanPlayer.new
     @board = Board.new
     @computer_player = ComputerPlayer.new
+    @fastest_win = nil
+    @fastest_loss = nil
     p "Please enter username."
     @username = gets.chomp
     p "Hi #{@username}, welcome to Connect 4!"
@@ -32,6 +34,10 @@ class Game
         @board.print_matrix
         finish_time = Time.now.to_i
         time_elapsed = finish_time - start_time
+        if @fastest_win == nil || @fastest_win > time_elapsed
+            @fastest_win = time_elapsed
+        else
+        end
         p "Nice job #{@username}, you win!"
         p "The game lasted #{time_elapsed} seconds. Think you can do better next time?"
       elsif @board.check_for_win_o
@@ -39,6 +45,10 @@ class Game
         p "Sorry #{@username}, you got beat by sentient AI."
         finish_time = Time.now.to_i
         time_elapsed = finish_time - start_time
+        if @fastest_loss == nil || @fastest_loss > time_elapsed
+            @fastest_loss = time_elapsed
+        else
+        end
         p "The game lasted #{time_elapsed} seconds. Think you can do better next time?"
       elsif @board.check_for_tie
         @board.print_matrix
@@ -185,14 +195,16 @@ class Game
     loop do
         p "Press 1 to play timed matches,"
         p "press 2 to embark on an epic quest,"
+        p "press 3 to see fastest wins and losses,"
         p "press any other key to quit"
         option = gets.chomp.to_i
       if option == 1
         play
       elsif option == 2
         quest
-      elsif option != 1 && option != 2
-        break
+      elsif option == 3
+        p "Fastest win: #{@fastest_win} seconds."
+        p "Fastest loss: #{@fastest_loss} seconds."
       else
       break
       end

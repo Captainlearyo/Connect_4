@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'daru'
-require 'pry'
 RSpec.describe Board do
   describe '#initialize board' do
     board = Board.new
@@ -9,7 +7,6 @@ RSpec.describe Board do
     end
 
     it 'can display the board' do
-
       expected =  <<~OUTPUT
       #<Daru::DataFrame(6x7)>
              A   B   C   D   E   F   G
@@ -38,7 +35,6 @@ RSpec.describe Board do
          5   .   .   .   .   .   .   .
          6   X   X   X   O   .   .   .
     OUTPUT
-
       expect{board.print_matrix}.to output(expected).to_stdout
     end
 

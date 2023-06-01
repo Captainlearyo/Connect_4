@@ -59,7 +59,7 @@ class ComputerPlayer
   #   end
   # end
 
-  def logic_check_rows(board)
+  def logic_check_rows_to_win(board)
     m = board.matrix
     m.each do |row| 
       row.each_with_index do |val, i|
